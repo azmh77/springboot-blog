@@ -1,12 +1,15 @@
-package com.rhpm.testapp.modules.model;
+package com.rhpm.testapp.modules.model.users;
 
+import com.rhpm.testapp.modules.model.posts.Post;
 import jakarta.persistence.*;
+import lombok.Data;
 
 @Entity
+@Data
 @Table(name = "User_tbl")
 public class User {
     @Id
-    @GeneratedValue()
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private long id;
     @Column(name = "user_name")

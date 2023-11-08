@@ -1,6 +1,6 @@
 package com.rhpm.testapp.modules.controller;
 
-import com.rhpm.testapp.modules.model.User;
+import com.rhpm.testapp.modules.model.users.User;
 import com.rhpm.testapp.modules.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
