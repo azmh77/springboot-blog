@@ -16,5 +16,5 @@ public class User {
     @Column(name = "user_password")
     private String password;
     @Column(name = "user_phoneNumber")
-    private int phoneNumber;
+    private long phoneNumber;
 }
