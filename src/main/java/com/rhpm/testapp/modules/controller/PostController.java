@@ -15,7 +15,8 @@ public class PostController {
         this.postService = postService;
     }
 
-    @GetMapping(value = "/z")    public List<Post> getAllPost () {
+    @GetMapping(value = "/get_posts")
+    public List<Post> getAllPost () {
         return postService.getAllPost();
     }
     @RequestMapping(value = "/create_post")
