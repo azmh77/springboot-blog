@@ -2,12 +2,14 @@ package com.rhpm.testapp.modules.model.posts;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.rhpm.testapp.modules.model.users.User;
 import jakarta.persistence .*;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -25,6 +27,10 @@ public class Post {
     @ManyToMany()
     @JoinTable(name = "post_category")
     private List<Category> category;
+
+    @Transient
+    @JsonIgnore
+    private MultipartFile file;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

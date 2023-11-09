@@ -28,5 +28,32 @@
             </div>
         </div>
     </nav>
+
+    <form th:fragment="postRegester">
+            <div class="col-6 mx-auto mt-5 border p-5 shadow-sm">
+                <div class="mb-4">
+                    <label for="exampleFormControlInput1" class="form-label">Post Title</label>
+                    <input type="email" class="form-control" id="exampleFormControlInput1">
+                </div>
+                <div class="mb-4">
+                    <select class="form-select" id="inputGroupSelect01">
+                        <option selected>category...</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label for="exampleFormControlTextarea1" class="form-label">Post Description</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                </div>
+                <div class="mb-4">
+                    <input type="file" class="form-control" id="inputGroupFile03">
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-outline-primary w-100">submit</button>
+                </div>
+            </div>
+        </form>
 </body>
 </html>
