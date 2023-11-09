@@ -6,6 +6,9 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.rhpm.testapp.modules.model.users.User;
 import jakarta.persistence .*;
 import lombok.Data;
+
+import java.util.List;
+
 @Entity
 @Data
 @Table(name = "Post_tbl")
@@ -15,6 +18,10 @@ public class Post {
     @ManyToOne()
     @JoinColumn(name = "owner_id")
     private User user;
+
+    @ManyToMany()
+    @JoinTable(name = "post_category")
+    private List<Category> category;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
