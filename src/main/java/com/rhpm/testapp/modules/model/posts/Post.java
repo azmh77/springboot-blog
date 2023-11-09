@@ -6,7 +6,10 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.rhpm.testapp.modules.model.users.User;
 import jakarta.persistence .*;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -31,4 +34,11 @@ public class Post {
     private String title;
     @Column(name = "post_description")
     private String description;
+
+    @Column(name = "create_at", updatable = false)
+    @CreationTimestamp
+    private LocalDateTime createAt;
+    @Column(name = "update_at")
+    @UpdateTimestamp
+    private LocalDateTime updateAt;
 }
