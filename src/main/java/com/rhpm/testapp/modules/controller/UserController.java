@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/")
 public class UserController {
     private UserService userService;
 
@@ -17,12 +16,12 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping(value = {"/",""})
+    @GetMapping(value = "get_users")
     public List<User> getAllUser() {
         return userService.findAllUser();
     }
 
-    @PostMapping(value = {"/",""})
+    @PostMapping(value = "create_users")
     public User registerUser(@RequestBody User user){
         return userService.registerUser(user);
     }
