@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation .*;
 
+import java.io.IOException;
 import java.util.List;
 
 @Controller
+@RequestMapping(value = "/posts")
 public class PostController {
     private PostService postService;
     @Autowired
@@ -16,23 +18,23 @@ public class PostController {
         this.postService = postService;
     }
 
-    @GetMapping(value = "/post")
+    @GetMapping(value = "")
     public String showRegisterPost() {
         return "post";
     }
 
-    @PostMapping(value = "/post")
-    public String registerPost(@ModelAttribute Post post) {
+    @PostMapping(value = "")
+    public String registerPost(@ModelAttribute Post post) throws IOException {
         postService.createPost(post);
         return "post";
     }
 
-    @GetMapping(value = "/get_posts")
+    @GetMapping(value = "/rest")
     public @ResponseBody List<Post> getAllPost () {
         return postService.getAllPost();
     }
-    @RequestMapping(value = "/create_post")
-    public @ResponseBody Post createPost (@RequestBody Post post) {
+    @RequestMapping(value = "/rest")
+    public @ResponseBody Post createPost (@RequestBody Post post) throws IOException {
         return postService.createPost(post);
     }
 }

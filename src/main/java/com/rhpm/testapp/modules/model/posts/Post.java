@@ -1,8 +1,6 @@
 package com.rhpm.testapp.modules.model.posts;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.rhpm.testapp.modules.model.users.User;
 import jakarta.persistence .*;
@@ -40,6 +38,8 @@ public class Post {
     private String title;
     @Column(name = "post_description")
     private String description;
+    @Column(name = "post_cover")
+    private String cover;
 
     @Column(name = "create_at", updatable = false)
     @CreationTimestamp
