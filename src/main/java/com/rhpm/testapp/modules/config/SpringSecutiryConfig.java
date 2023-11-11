@@ -50,6 +50,7 @@ public class SpringSecutiryConfig {
                 .formLogin(formLogin -> formLogin
                         .loginPage("/Login")
                         .usernameParameter("email")
+                        .defaultSuccessUrl("/",true)
                         .permitAll()
                 )
                 .rememberMe(Customizer.withDefaults());
