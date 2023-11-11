@@ -21,4 +21,9 @@ public class MainController {
         model.addAttribute("posts" , postService.getAllPost());
         return "index";
     }
+
+    @RequestMapping("/Login")
+    public String login() {
+        return "Login";
+    }
 }

@@ -33,6 +33,9 @@ public class PostService {
         String path = ResourceUtils.getFile("classpath:static/img/").getAbsolutePath();
         byte[] bytea = post.getFile().getBytes();
         Files.write(Paths.get(path + File.separator + post.getFile().getOriginalFilename()), bytea);
+
+//        post.setImage(post.getFile().getBytes());
+
         return postRepository.save(post);
     }
 }

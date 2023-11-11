@@ -55,5 +55,21 @@
                 </div>
             </div>
         </form>
+
+    <div th:fragment="loginPage" class="mt-5 border p-5 w-50 mx-auto">
+        <div class="mx-auto mb-4 text-center"><h5>Login Page</h5></div>
+        <div class="w-75 mx-auto mb-3">
+            <label for="inputPassword1" class="form-label">Email</label>
+            <input type="email" id="inputPassword1" class="form-control" aria-describedby="passwordHelpBlock">
+        </div>
+        <div class="w-75 mx-auto mb-4">
+            <label for="inputPassword2" class="form-label">Password</label>
+            <input type="password" id="inputPassword2" class="form-control" aria-describedby="passwordHelpBlock">
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-outline-primary w-75">submit</button>
+        </div>
+    </div>
+
 </body>
 </html>

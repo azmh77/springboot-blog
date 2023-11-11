@@ -41,6 +41,10 @@ public class Post {
     @Column(name = "post_cover")
     private String cover;
 
+//    @Lob
+//    @Column(name = "image",columnDefinition = "BINARY LARGE OBJECT")
+//    private byte[] image;
+
     @Column(name = "create_at", updatable = false)
     @CreationTimestamp
     private LocalDateTime createAt;
