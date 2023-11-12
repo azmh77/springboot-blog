@@ -2,6 +2,7 @@ package com.rhpm.testapp.modules;
 
 import com.rhpm.testapp.modules.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,5 +26,15 @@ public class MainController {
     @RequestMapping("/Login")
     public String login() {
         return "Login";
+    }
+
+    @RequestMapping("/users")
+    public String users() {
+        return "users";
+    }
+
+    @RequestMapping("/category")
+    public String category() {
+        return "category";
     }
 }
