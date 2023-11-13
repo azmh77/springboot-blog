@@ -18,7 +18,7 @@
                     <th scope="col">email</th>
                     <th scope="col">password</th>
                     <th scope="col">phoneNumber</th>
-<!--                    <th scope="col">role</th>-->
+                    <th scope="col">role</th>
                     <th scope="col">status</th>
                     <th scope="col">More</th>
                 </tr>
@@ -30,7 +30,7 @@
                     <td th:text="${user.getEmail()}"></td>
                     <td th:text="${user.getPassword()}"></td>
                     <td th:text="${user.getPhoneNumber()}"></td>
-<!--                    <td th:text="${user.getRoles()}"></td>-->
+                    <td th:text="${user.getRoles().get(0)}"></td>
                     <td th:text="${user.isEnable()}"></td>
                     <td class="d-flex justify-content-center p-1">
                         <div><button type="button" class="btn btn-success btn-sm mx-2">Enable</button></div>

@@ -23,7 +23,7 @@
                 <td th:text="${categorys.getId()}"></td>
                 <td th:text="${categorys.getTitle()}"></td>
                 <td class="d-flex justify-content-center p-1">
-                    <div><button type="button" class="btn btn-success btn-sm mx-2">Edite</button></div>
+                    <div><a type="button" class="btn btn-success btn-sm mx-2" th:href="@{/category/edite/{id}(id=${categorys.getId()})}">Edite</a></div>
                     <div><button type="button" class="btn btn-danger btn-sm mx-2">Delete</button></div>
                 </td>
             </tr>
