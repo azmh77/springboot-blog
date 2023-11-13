@@ -7,6 +7,7 @@ import com.rhpm.testapp.modules.model.posts.Post;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
