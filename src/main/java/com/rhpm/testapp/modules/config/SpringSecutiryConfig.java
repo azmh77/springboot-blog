@@ -27,10 +27,8 @@ import javax.sql.DataSource;
 @EnableWebSecurity
 public class SpringSecutiryConfig {
 
-
-
     @Autowired
-    public void configureGlobal(@Lazy AuthenticationManagerBuilder auth, UserService userService, PasswordEncoder passwordEncoder) throws Exception {
+    public void configureGlobal(AuthenticationManagerBuilder auth,UserService userService,@Lazy PasswordEncoder passwordEncoder) throws Exception {
         auth.userDetailsService(userService).passwordEncoder(passwordEncoder);
     }
 
@@ -47,16 +45,21 @@ public class SpringSecutiryConfig {
     @Bean
     public SecurityFilterChain security(HttpSecurity http) throws Exception {
         http
+                .csrf(csrf->csrf.disable())
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(new AntPathRequestMatcher("/", "GET")).permitAll()
-                        .requestMatchers(new AntPathRequestMatcher("/users/**", "")).hasAuthority("ADMIN")
-                        .requestMatchers(new AntPathRequestMatcher("/category/**","")).hasAuthority("ADMIN")
+                        .requestMatchers(new AntPathRequestMatcher("/users", "")).hasRole("ADMIN")
+                        .requestMatchers(new AntPathRequestMatcher("/category","")).hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .formLogin(formLogin -> formLogin
                         .loginPage("/Login")
                         .usernameParameter("email")
                         .defaultSuccessUrl("/",true)
+                        .permitAll()
+                )
+                .logout((logout) -> logout
+                        .logoutSuccessUrl("/Login")
                         .permitAll()
                 )
                 .rememberMe(Customizer.withDefaults());

@@ -2,12 +2,10 @@ package com.rhpm.testapp.modules.model.users;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import com.rhpm.testapp.modules.enums.Roles;
+import com.rhpm.testapp.modules.enums.Role;
 import com.rhpm.testapp.modules.model.posts.Post;
 import jakarta.persistence.*;
 import lombok.Data;
-
-import javax.management.relation.Role;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
@@ -18,14 +16,14 @@ import java.util.Set;
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class User implements Serializable {
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user",fetch = FetchType.EAGER)
     private List<Post> post;
 
-    @ElementCollection(targetClass = Role.class)
+    @ElementCollection(targetClass = Role.class,fetch = FetchType.EAGER)
     @CollectionTable(name = "authorities" , joinColumns = @JoinColumn
-            (name = "email",referencedColumnName = "user_email"))
+            (name = "email",referencedColumnName = "email"))
     @Enumerated(EnumType.STRING)
-    private List<Roles> roles;
+    private List<Role> roles;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,7 +31,6 @@ public class User implements Serializable {
     private long id;
     @Column(name = "user_name")
     private String name;
-    @Column(name = "user_email")
     private String email;
     @Column(name = "user_password")
     private String password;

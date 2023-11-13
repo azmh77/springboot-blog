@@ -28,6 +28,11 @@ public class MainController {
         return "Login";
     }
 
+    /*@RequestMapping("/logout")
+    public String logout() {
+        return "redirect:/Login";
+    }*/
+
     @RequestMapping("/users")
     public String users() {
         return "users";

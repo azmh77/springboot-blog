@@ -1,5 +1,6 @@
 package com.rhpm.testapp.modules.service;
 
+import com.rhpm.testapp.modules.enums.Role;
 import com.rhpm.testapp.modules.model.users.User;
 import com.rhpm.testapp.modules.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import java.util.List;
 public class UserService implements UserDetailsService {
 
     private UserRepository userRepository;
+
     @Autowired
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -23,7 +25,7 @@ public class UserService implements UserDetailsService {
         return userRepository.save(user);
     }
 
-    public List<User> findAllUser(){
+    public List<User> findAllUser() {
         return userRepository.findAll();
     }
 
@@ -31,13 +33,13 @@ public class UserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         org.springframework.security.core.userdetails.User.UserBuilder builder = null;
         User user = userRepository.findByEmail(email);
-        if (user==null) {
+        if (user == null) {
             throw new UsernameNotFoundException(email);
-        }else{
+        } else {
             builder = org.springframework.security.core.userdetails.User.withUsername(email);
             builder.password(user.getPassword());
-//            builder.roles(user.getRole());
+            builder.roles(user.getRoles().stream().map(Role::getAuthority).toList().toArray(new String[user.getRoles().size()]));
         }
-        return builder==null ? null : builder.build();
+        return builder == null ? null : builder.build();
     }
 }
