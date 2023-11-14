@@ -53,4 +53,5 @@ public class Post {
     @Column(name = "update_at")
     @UpdateTimestamp
     private LocalDateTime updateAt;
+
 }

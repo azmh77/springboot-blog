@@ -1,15 +1,16 @@
 package com.rhpm.testapp.modules.model.users;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.rhpm.testapp.modules.enums.Role;
 import com.rhpm.testapp.modules.model.posts.Post;
 import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Data
@@ -22,9 +23,13 @@ public class User implements Serializable {
 
     @ElementCollection(targetClass = Role.class,fetch = FetchType.EAGER)
     @CollectionTable(name = "authorities" , joinColumns = @JoinColumn
-            (name = "email",referencedColumnName = "email"))
+            (name = "email",referencedColumnName = "user_email"))
     @Enumerated(EnumType.STRING)
     private List<Role> roles;
+
+//    @Transient
+//    @JsonIgnore
+//    private MultipartFile file;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,11 +37,14 @@ public class User implements Serializable {
     private long id;
     @Column(name = "user_name")
     private String name;
+    @Column(name = "user_email")
     private String email;
     @Column(name = "user_password")
     private String password;
     @Column(name = "user_phoneNumber")
     private long phoneNumber;
+//    @Column(name = "user_cover")
+//    private long cover;
 
     private boolean enable = true;
 }

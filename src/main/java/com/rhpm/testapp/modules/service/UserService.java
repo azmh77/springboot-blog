@@ -8,7 +8,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ResourceUtils;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 
 @Service
@@ -21,7 +27,11 @@ public class UserService implements UserDetailsService {
         this.userRepository = userRepository;
     }
 
-    public User registerUser(User user) {
+    public User registerUser(User user) throws IOException {
+//        String path = ResourceUtils.getFile("classpath:static/img/").getAbsolutePath();
+//        byte[] bytea = user.getFile().getBytes();
+//        Files.write(Paths.get(path + File.separator + user.getFile().getOriginalFilename()), bytea);
+//      user.setCover(user.getFile().getBytes());
         return userRepository.save(user);
     }
 

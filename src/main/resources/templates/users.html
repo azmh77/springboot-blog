@@ -24,17 +24,17 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="user :${users}" class="text-center">
-                    <td th:text="${user.getId()}"></td>
-                    <td th:text="${user.getName()}"></td>
-                    <td th:text="${user.getEmail()}"></td>
-                    <td th:text="${user.getPassword()}"></td>
-                    <td th:text="${user.getPhoneNumber()}"></td>
-                    <td th:text="${user.getRoles().get(0)}"></td>
-                    <td th:text="${user.isEnable()}"></td>
+                <tr th:each="users :${users}" class="text-center">
+                    <td th:text="${users.getId()}"></td>
+                    <td th:text="${users.getName()}"></td>
+                    <td th:text="${users.getEmail()}"></td>
+                    <td th:text="${users.getPassword()}"></td>
+                    <td th:text="${users.getPhoneNumber()}"></td>
+                    <td th:text="${users.getRoles()}"></td>
+                    <td th:text="${users.isEnable()}"></td>
                     <td class="d-flex justify-content-center p-1">
-                        <div><button type="button" class="btn btn-success btn-sm mx-2">Enable</button></div>
-                        <div><button type="button" class="btn btn-danger btn-sm mx-2">Disable</button></div>
+                        <div><button type="button" class="btn btn-success btn-sm mx-2">Edite</button></div>
+                        <div><button type="button" class="btn btn-danger btn-sm mx-2">Delete</button></div>
                     </td>
                 </tr>
                 </tbody>

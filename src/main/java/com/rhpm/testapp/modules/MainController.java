@@ -37,12 +37,6 @@ public class MainController {
         return "Login";
     }
 
-    @RequestMapping("/users")
-    public String users(Model model) {
-        model.addAttribute("users" , userService.findAllUser());
-        return "users";
-    }
-
     @RequestMapping("/category")
     public String category( Model model) {
         model.addAttribute("category" , categoryService.getAllCategory());

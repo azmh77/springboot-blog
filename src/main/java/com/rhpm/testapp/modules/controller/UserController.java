@@ -5,6 +5,7 @@ import com.rhpm.testapp.modules.model.users.User;
 import com.rhpm.testapp.modules.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -14,13 +15,20 @@ import java.util.List;
 public class UserController {
     private UserService userService;
 
+    @GetMapping("/users")
+    public String users(Model model) {
+        model.addAttribute("users" , userService.findAllUser());
+        return "users";
+    }
+
     @GetMapping(value = "/users/registerUsers")
-    public String showRegisterCategory() {
+    public String showRegisterCategory(Model model) {
+        model.addAttribute("user" , new User());
         return "registerUsers";
     }
 
     @PostMapping(value = "/users/registerUsers")
-    public String registerCategory(@ModelAttribute User user) throws IOException {
+    public String registerUsers(@ModelAttribute User user) throws IOException {
         userService.registerUser(user);
         return "redirect:/users";
     }
@@ -36,7 +44,7 @@ public class UserController {
     }
 
     @PostMapping(value = "create_users")
-    public @ResponseBody User registerUser(@RequestBody User user){
+    public @ResponseBody User registerUser(@RequestBody User user) throws IOException {
         return userService.registerUser(user);
     }
 }
