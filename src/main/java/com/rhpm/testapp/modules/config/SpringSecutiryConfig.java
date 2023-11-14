@@ -39,7 +39,7 @@ public class SpringSecutiryConfig {
                 .csrf(csrf->csrf.disable())
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(new AntPathRequestMatcher("/", "GET")).permitAll()
-                        .requestMatchers("/css/**" , "").permitAll()
+//                        .requestMatchers("/css/**" , "favicon.ico").permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/users", "")).hasRole("ADMIN")
                         .requestMatchers(new AntPathRequestMatcher("/category","")).hasRole("ADMIN")
                         .anyRequest().authenticated()

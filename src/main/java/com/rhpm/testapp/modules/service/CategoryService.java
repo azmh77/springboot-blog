@@ -2,6 +2,7 @@ package com.rhpm.testapp.modules.service;
 
 import com.rhpm.testapp.modules.model.posts.Category;
 import com.rhpm.testapp.modules.repository.CategoryRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +26,12 @@ public class CategoryService {
         return categoryRepository.save(category);
     }
 
+    @Transactional
     public Optional<Category> findById(Long id) {
         return categoryRepository.findById(id);
+    }
+
+    public void deleteById(Long id) {
+        categoryRepository.deleteById(id);
     }
 }

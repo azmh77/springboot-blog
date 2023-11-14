@@ -17,7 +17,7 @@ public class Category {
     private List<Post> posts;
 
     @Id
-    @GeneratedValue()
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "category_id")
     private long id;
     @Column(name = "category_title")

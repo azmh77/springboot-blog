@@ -24,8 +24,27 @@
                 <td th:text="${categorys.getTitle()}"></td>
                 <td class="d-flex justify-content-center p-1">
                     <div><a type="button" class="btn btn-success btn-sm mx-2" th:href="@{/category/edite/{id}(id=${categorys.getId()})}">Edite</a></div>
-                    <div><button type="button" class="btn btn-danger btn-sm mx-2">Delete</button></div>
+                    <div><a type="button" class="btn btn-danger btn-sm mx-2" data-bs-toggle="modal" data-bs-target="" th:attr="data-bs-target=${'#categoryDeleteModal'+categorys.getId()}">Delete</a></div>
                 </td>
+
+                <!--Modal-->
+                <div class="modal fade" th:id="categoryDeleteModal+${categorys.getId()}" tabindex="-1" aria-labelledby="categoryDeleteModal" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body" th:text="Delete +${categorys.title}">
+                            </div>
+                            <div class="modal-footer">
+                                <a type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</a>
+                                <a type="button" class="btn btn-primary" th:href="@{/category/delete/{id}(id=${categorys.getId()})}">Save changes</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </tr>
             </tbody>
         </table>

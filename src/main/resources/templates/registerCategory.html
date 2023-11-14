@@ -8,11 +8,12 @@
     <header th:replace="Fragment/layout::header"></header>
     <main>
         <div class="container-fluid">
-            <form th:action="@{/category/registerCategory}" method="post" class="mt-5 border p-5 w-50 mx-auto" th:object="${category}">
+            <form th:action="@{/category/registerCategory}" method="post" class="mt-5 border p-5 w-50 mx-auto" th:object="${Category}">
+                <input type="hidden" th:field="${Category.id}">
                 <div class="mx-auto mb-4 text-center"><h5>New Category</h5></div>
                 <div class="w-75 mx-auto mb-3">
                     <label for="inputTitle" class="form-label">Title</label>
-                    <input type="text" id="inputTitle" th:field="${category.title}" class="form-control">
+                    <input type="text" id="inputTitle" th:field="${Category.title}" class="form-control">
                 </div>
                 <div class="text-center">
                     <button type="submit" class="btn btn-outline-primary w-75">submit</button>

@@ -22,7 +22,7 @@ public class CategoryController {
     }
     @GetMapping(value = "/category/registerCategory")
     public String showRegisterCategory(Model model) {
-        model.addAttribute("category" , new Category());
+        model.addAttribute("Category" , new Category());
         return "registerCategory";
     }
 
@@ -34,8 +34,14 @@ public class CategoryController {
 
     @GetMapping(value = "/category/edite/{id}")
     public String editeCategory(Model model, @PathVariable("id") Long id) {
-        model.addAttribute("category" , categoryService.findById(id));
+        model.addAttribute("Category" , categoryService.findById(id));
         return "registerCategory";
+    }
+
+    @GetMapping(value = "/category/delete/{id}")
+    public String editeCategory(@PathVariable("id") Long id) {
+        categoryService.deleteById(id);
+        return "redirect:/category";
     }
 
     @RequestMapping(value = "/get_category")
