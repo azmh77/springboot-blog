@@ -27,9 +27,9 @@ public class User implements Serializable {
     @Enumerated(EnumType.STRING)
     private List<Role> roles;
 
-//    @Transient
-//    @JsonIgnore
-//    private MultipartFile file;
+    @Transient
+    @JsonIgnore
+    private MultipartFile file;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,8 +43,8 @@ public class User implements Serializable {
     private String password;
     @Column(name = "user_phoneNumber")
     private long phoneNumber;
-//    @Column(name = "user_cover")
-//    private long cover;
+    @Column(name = "user_cover")
+    private String cover;
 
     private boolean enable = true;
 }

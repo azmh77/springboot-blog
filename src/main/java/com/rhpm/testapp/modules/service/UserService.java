@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
 
@@ -16,6 +17,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -28,10 +30,11 @@ public class UserService implements UserDetailsService {
     }
 
     public User registerUser(User user) throws IOException {
-//        String path = ResourceUtils.getFile("classpath:static/img/").getAbsolutePath();
-//        byte[] bytea = user.getFile().getBytes();
-//        Files.write(Paths.get(path + File.separator + user.getFile().getOriginalFilename()), bytea);
-//      user.setCover(user.getFile().getBytes());
+        String path = ResourceUtils.getFile("classpath:static/img/").getAbsolutePath();
+        byte[] bytea = user.getFile().getBytes();
+        Files.write(Paths.get(path + File.separator + UUID.randomUUID() +user.getFile().getOriginalFilename()), bytea);
+        user.setCover(UUID.randomUUID() +user.getFile().getOriginalFilename());
+        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         return userRepository.save(user);
     }
 

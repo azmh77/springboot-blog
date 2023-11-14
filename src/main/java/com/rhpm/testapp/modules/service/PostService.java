@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class PostService {
@@ -30,12 +31,11 @@ public class PostService {
 
     @Transactional
     public Post createPost (Post post) throws IOException {
+
         String path = ResourceUtils.getFile("classpath:static/img/").getAbsolutePath();
         byte[] bytea = post.getFile().getBytes();
-        Files.write(Paths.get(path + File.separator + post.getFile().getOriginalFilename()), bytea);
-
-//        post.setImage(post.getFile().getBytes());
-
+        Files.write(Paths.get(path + File.separator + UUID.randomUUID() + post.getFile().getOriginalFilename()), bytea);
+        post.setCover(UUID.randomUUID() + post.getFile().getOriginalFilename());
         return postRepository.save(post);
     }
 }

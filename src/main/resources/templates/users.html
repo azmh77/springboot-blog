@@ -30,7 +30,7 @@
                     <td th:text="${users.getEmail()}"></td>
                     <td th:text="${users.getPassword()}"></td>
                     <td th:text="${users.getPhoneNumber()}"></td>
-                    <td th:text="${users.getRoles()}"></td>
+                    <td th:text="${users.getRoles().get(0)}"></td>
                     <td th:text="${users.isEnable()}"></td>
                     <td class="d-flex justify-content-center p-1">
                         <div><button type="button" class="btn btn-success btn-sm mx-2">Edite</button></div>

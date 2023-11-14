@@ -9,7 +9,7 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -23,15 +23,10 @@ public class SpringSecutiryConfig {
         auth.userDetailsService(userService).passwordEncoder(passwordEncoder);
     }
 
-    /*@Bean(name = "passwordEncoder")
+    @Bean(name = "passwordEncoder")
     public PasswordEncoder BCPasswordEncoder(){
         return new BCryptPasswordEncoder(11);
-    }*/
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return NoOpPasswordEncoder.getInstance();
     }
-
 
     @Bean
     public SecurityFilterChain security(HttpSecurity http) throws Exception {
@@ -39,7 +34,7 @@ public class SpringSecutiryConfig {
                 .csrf(csrf->csrf.disable())
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(new AntPathRequestMatcher("/", "GET")).permitAll()
-//                        .requestMatchers("/css/**" , "favicon.ico").permitAll()
+                        .requestMatchers("/css/**" , "favicon.ico").permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/users", "")).hasRole("ADMIN")
                         .requestMatchers(new AntPathRequestMatcher("/category","")).hasRole("ADMIN")
                         .anyRequest().authenticated()

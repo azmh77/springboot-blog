@@ -27,16 +27,15 @@
                     <input type="text" id="inputPhoneNumber" name="phoneNumber" class="form-control" th:field="${user.phoneNumber}">
                 </div>
                 <div class="w-75 mx-auto mb-3">
-                    <select class="form-select">
-                        <option selected>Open this select menu</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <select class="form-select"} th:field="${user.roles}">
+                        <option th:each="role :${T(com.rhpm.testapp.modules.enums.Role).values()}"
+                        th:text="${role}"
+                        th:value="${role}"></option>
                     </select>
                 </div>
                 <div class="w-75 mx-auto mb-3">
                     <label for="inputCoverPhoto" class="form-label">coverPhoto</label>
-                    <input type="file" class="form-control" id="inputCoverPhoto">
+                    <input type="file" class="form-control" id="inputCoverPhoto" th:field="${user.file}">
                 </div>
                 <div class="text-center">
                     <button type="submit" class="btn btn-outline-primary w-75">submit</button>
