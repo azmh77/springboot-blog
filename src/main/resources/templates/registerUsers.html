@@ -9,6 +9,7 @@
     <main>
         <div class="container-fluid">
             <form th:action="@{/users/registerUsers}" enctype="multipart/form-data" th:object="${user}" method="post" class="mt-5 border p-5 w-50 mx-auto">
+                <input type="hidden" th:field="${user.id}">
                 <div class="mx-auto mb-4 text-center"><h5>New User</h5></div>
                 <div class="w-75 mx-auto mb-3">
                     <label for="inputName" class="form-label">name</label>

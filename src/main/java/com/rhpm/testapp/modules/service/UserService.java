@@ -1,8 +1,10 @@
 package com.rhpm.testapp.modules.service;
 
+import com.rhpm.testapp.modules.MyBeanCopy;
 import com.rhpm.testapp.modules.enums.Role;
 import com.rhpm.testapp.modules.model.users.User;
 import com.rhpm.testapp.modules.repository.UserRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,11 +14,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -29,12 +32,26 @@ public class UserService implements UserDetailsService {
         this.userRepository = userRepository;
     }
 
-    public User registerUser(User user) throws IOException {
-        String path = ResourceUtils.getFile("classpath:static/img/").getAbsolutePath();
-        byte[] bytea = user.getFile().getBytes();
-        Files.write(Paths.get(path + File.separator + UUID.randomUUID() +user.getFile().getOriginalFilename()), bytea);
-        user.setCover(UUID.randomUUID() +user.getFile().getOriginalFilename());
-        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+    public User registerUser(User user) throws IOException, InvocationTargetException, IllegalAccessException {
+        if(!user.getFile().isEmpty()) {
+            String path = ResourceUtils.getFile("classpath:static/img/").getAbsolutePath();
+            byte[] bytea = user.getFile().getBytes();
+            Files.write(Paths.get(path + File.separator + UUID.randomUUID() + user.getFile().getOriginalFilename()), bytea);
+            user.setCover(UUID.randomUUID() + user.getFile().getOriginalFilename());
+        }
+
+        if(!user.getPassword().isEmpty()) {
+            user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+        }else{
+            user.setPassword(null);
+        }
+
+        if (user.getId() != null) {
+            User exist = userRepository.findById(user.getId()).orElseThrow(() -> new RuntimeException("User not found!"));
+            MyBeanCopy myBeanCopy = new MyBeanCopy();
+            myBeanCopy.copyProperties(exist,user);
+            return userRepository.save(exist);
+        }
         return userRepository.save(user);
     }
 
@@ -54,5 +71,9 @@ public class UserService implements UserDetailsService {
             builder.roles(user.getRoles().stream().map(Role::getAuthority).toList().toArray(new String[user.getRoles().size()]));
         }
         return builder == null ? null : builder.build();
+    }
+
+    public Optional<User> findById(Long id) {
+        return userRepository.findById(id);
     }
 }
