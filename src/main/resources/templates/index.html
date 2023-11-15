@@ -9,21 +9,35 @@
 
 <main>
     <div class="container-fluid">
-        <div class="row row-cols-1 row-cols-md-3 g-4 mt-1">
-            <div class="col" th:each="post : ${posts}">
-                <div class="card h-100">
-                    <img src="#" class="card-img-top" alt="#">
-                    <div class="card-body">
-                        <h5 class="card-title" th:text="${post.getTitle()}"></h5>
-                        <p class="card-text" th:text="${post.getDescription()}"></p>
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-body-secondary"
-                               th:text="'Last Update : ' + ${#temporals.format(post.getUpdateAt(),'yyy-mm-dd HH:mm')}"></small>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <table class="table table-striped table-sm w-75 mx-auto mt-2 table-bordered">
+            <thead >
+            <tr class="text-center">
+                <th scope="col">title</th>
+                <th scope="col">user</th>
+                <th scope="col">category</th>
+                <th scope="col">createAt</th>
+                <th scope="col">updateAt</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="post :${posts}" class="text-center">
+                <td th:text="${post.getTitle()}"></td>
+                <td th:text="${post.getUser().name}"></td>
+                <td>
+                    <ul class="list-group">
+                        <li class="list-group-item" th:each="category :${post.category}"
+                        th:text="${category.title}"></li>
+                    </ul>
+                </td>
+                <td th:text="${post.getCreateAt()}"></td>
+                <td th:text="${post.getUpdateAt()}"></td>
+                <td class="d-flex justify-content-center p-1">
+                    <div><a type="button" class="btn btn-success btn-sm mx-2">Edite</a></div>
+                    <div><a type="button" class="btn btn-danger btn-sm mx-2">Delete</a></div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </main>
 
